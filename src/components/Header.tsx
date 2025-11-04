@@ -1,7 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { FileText, Menu } from "lucide-react";
+import { FileText, Menu, BookMarked, LogOut } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between px-4">
@@ -25,12 +29,41 @@ const Header = () => {
         </nav>
 
         <div className="flex items-center gap-3">
-          <Button variant="ghost" className="hidden md:inline-flex">
-            로그인
-          </Button>
-          <Button className="bg-gradient-to-r from-primary to-accent text-white">
-            시작하기
-          </Button>
+          {user ? (
+            <>
+              <Button
+                variant="ghost"
+                className="hidden md:inline-flex"
+                onClick={() => navigate("/my-bookmarks")}
+              >
+                <BookMarked className="w-4 h-4 mr-2" />
+                내 과제함
+              </Button>
+              <Button 
+                variant="outline"
+                onClick={signOut}
+              >
+                <LogOut className="w-4 h-4 mr-2" />
+                로그아웃
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button 
+                variant="ghost" 
+                className="hidden md:inline-flex"
+                onClick={() => navigate("/auth")}
+              >
+                로그인
+              </Button>
+              <Button 
+                className="bg-gradient-to-r from-primary to-accent text-white"
+                onClick={() => navigate("/auth")}
+              >
+                시작하기
+              </Button>
+            </>
+          )}
           <Button variant="ghost" size="icon" className="md:hidden">
             <Menu className="w-5 h-5" />
           </Button>

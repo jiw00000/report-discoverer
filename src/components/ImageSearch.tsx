@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, Download, ExternalLink } from "lucide-react";
+import { Search, Download, ExternalLink, Bookmark } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/contexts/AuthContext";
+import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "react-router-dom";
 import {
   Dialog,
   DialogContent,
@@ -38,6 +41,8 @@ const ImageSearch = () => {
     localStorage.getItem("unsplash_api_key") || ""
   );
   const { toast } = useToast();
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
   const searchImages = async () => {
     if (!apiKey) {
@@ -135,6 +140,42 @@ const ImageSearch = () => {
     }
   };
 
+  const bookmarkImage = async (image: UnsplashImage) => {
+    if (!user) {
+      toast({
+        title: "로그인이 필요합니다",
+        description: "북마크를 사용하려면 로그인해주세요",
+        variant: "destructive",
+      });
+      navigate("/auth");
+      return;
+    }
+
+    try {
+      const { error } = await supabase.from("bookmarks").insert({
+        user_id: user.id,
+        title: image.alt_description || "Untitled",
+        url: image.links.html,
+        description: `Photo by ${image.user.name}`,
+        bookmark_type: "image",
+        image_url: image.urls.regular,
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "북마크 저장",
+        description: "이미지가 내 과제함에 저장되었습니다",
+      });
+    } catch (error) {
+      toast({
+        title: "저장 실패",
+        description: "북마크를 저장할 수 없습니다",
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
     <section className="py-16 px-4 bg-background">
       <div className="container mx-auto">
@@ -220,6 +261,14 @@ const ImageSearch = () => {
                     <div className="flex gap-2">
                       <Button
                         size="sm"
+                        onClick={() => bookmarkImage(image)}
+                        variant="secondary"
+                      >
+                        <Bookmark className="w-4 h-4 mr-2" />
+                        북마크
+                      </Button>
+                      <Button
+                        size="sm"
                         onClick={() => downloadImage(image)}
                         className="flex-1"
                       >
@@ -228,7 +277,7 @@ const ImageSearch = () => {
                       </Button>
                       <Button
                         size="sm"
-                        variant="secondary"
+                        variant="outline"
                         onClick={() => window.open(image.links.html, "_blank")}
                       >
                         <ExternalLink className="w-4 h-4" />
