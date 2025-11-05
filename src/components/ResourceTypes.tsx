@@ -1,6 +1,25 @@
 import { Card } from "@/components/ui/card";
 import { FileText, BarChart3, FileSpreadsheet, Globe } from "lucide-react";
 
+const sourceLinks: Record<string, string> = {
+  "RISS": "https://www.riss.kr/",
+  "DBpia": "https://www.dbpia.co.kr/",
+  "KISS": "https://kiss.kstudy.com/",
+  "Google Scholar": "https://scholar.google.com/",
+  "KOSIS": "https://kosis.kr/",
+  "공공데이터포털": "https://www.data.go.kr/",
+  "통계청": "https://kostat.go.kr/",
+  "e-나라지표": "https://www.index.go.kr/",
+  "KDI": "https://www.kdi.re.kr/",
+  "산업연구원": "https://www.kiet.re.kr/",
+  "정책연구원": "https://www.kipa.re.kr/",
+  "STEPI": "https://www.stepi.re.kr/",
+  "공공기관": "https://www.alio.go.kr/",
+  "연구소": "https://www.nrf.re.kr/",
+  "학회": "https://www.kci.go.kr/",
+  "정부부처": "https://www.gov.kr/"
+};
+
 const resourceTypes = [
   {
     icon: FileText,
@@ -63,12 +82,15 @@ const ResourceTypes = () => {
                 
                 <div className="flex flex-wrap gap-2">
                   {type.sources.map((source, idx) => (
-                    <span 
+                    <a
                       key={idx}
-                      className="text-xs px-3 py-1 bg-muted rounded-full text-muted-foreground"
+                      href={sourceLinks[source]}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs px-3 py-1 bg-muted rounded-full text-muted-foreground hover:bg-primary/10 hover:text-primary transition-colors cursor-pointer"
                     >
                       {source}
-                    </span>
+                    </a>
                   ))}
                 </div>
               </Card>
