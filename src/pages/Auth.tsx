@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from "@/contexts/AuthContext";
-import { Loader2 } from "lucide-react";
+import { Loader2, ArrowLeft } from "lucide-react";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
@@ -38,13 +38,23 @@ const Auth = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/10 via-background to-accent/10 px-4">
-      <Card className="w-full max-w-md">
-        <CardHeader className="text-center">
-          <CardTitle className="text-3xl font-bold">리포트랙</CardTitle>
-          <CardDescription>
-            검증된 자료 저장소에 오신 것을 환영합니다
-          </CardDescription>
-        </CardHeader>
+      <div className="w-full max-w-md space-y-4">
+        <Button
+          variant="ghost"
+          onClick={() => navigate("/")}
+          className="gap-2"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          홈으로 돌아가기
+        </Button>
+        
+        <Card className="w-full">
+          <CardHeader className="text-center">
+            <CardTitle className="text-3xl font-bold">리포트랙</CardTitle>
+            <CardDescription>
+              검증된 자료 저장소에 오신 것을 환영합니다
+            </CardDescription>
+          </CardHeader>
         <CardContent>
           <Tabs defaultValue="login" className="w-full">
             <TabsList className="grid w-full grid-cols-2">
@@ -140,6 +150,7 @@ const Auth = () => {
           </Tabs>
         </CardContent>
       </Card>
+      </div>
     </div>
   );
 };
