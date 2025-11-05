@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const benefits = [
   "검증된 10,000+ 자료 무료 이용",
@@ -9,6 +10,15 @@ const benefits = [
 ];
 
 const CTA = () => {
+  const navigate = useNavigate();
+
+  const handleScrollToCategories = () => {
+    const categoriesSection = document.getElementById('categories');
+    if (categoriesSection) {
+      categoriesSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className="py-20 bg-gradient-to-br from-primary via-primary to-accent relative overflow-hidden">
       {/* Background Pattern */}
@@ -42,6 +52,7 @@ const CTA = () => {
             <Button 
               size="lg" 
               className="bg-white text-primary hover:bg-white/90 text-lg px-8 py-6 rounded-full shadow-2xl group"
+              onClick={() => navigate('/auth')}
             >
               무료로 시작하기
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -51,6 +62,7 @@ const CTA = () => {
               size="lg" 
               variant="outline"
               className="bg-transparent border-2 border-white text-white hover:bg-white/10 text-lg px-8 py-6 rounded-full"
+              onClick={handleScrollToCategories}
             >
               자료 둘러보기
             </Button>
