@@ -1,5 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { BookOpen, Cpu, Users, Palette } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const categories = [
   {
@@ -33,6 +34,8 @@ const categories = [
 ];
 
 const CategoryGrid = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="py-20 bg-background">
       <div className="container px-4">
@@ -52,6 +55,7 @@ const CategoryGrid = () => {
               <Card 
                 key={index}
                 className="p-6 bg-card hover:shadow-[var(--shadow-hover)] transition-all duration-300 cursor-pointer border-border group"
+                onClick={() => navigate(`/category/${encodeURIComponent(category.title)}`)}
               >
                 <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${category.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
                   <Icon className="w-8 h-8 text-white" />
