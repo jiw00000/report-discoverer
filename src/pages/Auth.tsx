@@ -12,7 +12,9 @@ const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
-  const [birthDate, setBirthDate] = useState("");
+  const [birthYear, setBirthYear] = useState("");
+  const [birthMonth, setBirthMonth] = useState("");
+  const [birthDay, setBirthDay] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { signIn, signUp, user } = useAuth();
   const navigate = useNavigate();
@@ -33,6 +35,7 @@ const Auth = () => {
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    const birthDate = `${birthYear}-${birthMonth.padStart(2, '0')}-${birthDay.padStart(2, '0')}`;
     await signUp(email, password, fullName, birthDate);
     setIsLoading(false);
   };
@@ -114,14 +117,36 @@ const Auth = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="signup-birthdate">생년월일</Label>
-                  <Input
-                    id="signup-birthdate"
-                    type="date"
-                    value={birthDate}
-                    onChange={(e) => setBirthDate(e.target.value)}
-                    required
-                  />
+                  <Label>생년월일</Label>
+                  <div className="grid grid-cols-3 gap-2">
+                    <Input
+                      type="number"
+                      placeholder="년 (YYYY)"
+                      value={birthYear}
+                      onChange={(e) => setBirthYear(e.target.value)}
+                      min="1900"
+                      max={new Date().getFullYear()}
+                      required
+                    />
+                    <Input
+                      type="number"
+                      placeholder="월 (MM)"
+                      value={birthMonth}
+                      onChange={(e) => setBirthMonth(e.target.value)}
+                      min="1"
+                      max="12"
+                      required
+                    />
+                    <Input
+                      type="number"
+                      placeholder="일 (DD)"
+                      value={birthDay}
+                      onChange={(e) => setBirthDay(e.target.value)}
+                      min="1"
+                      max="31"
+                      required
+                    />
+                  </div>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="signup-email">이메일</Label>
