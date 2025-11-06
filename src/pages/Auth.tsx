@@ -12,6 +12,7 @@ const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
+  const [birthDate, setBirthDate] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { signIn, signUp, user } = useAuth();
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ const Auth = () => {
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    await signUp(email, password, fullName);
+    await signUp(email, password, fullName, birthDate);
     setIsLoading(false);
   };
 
@@ -109,6 +110,16 @@ const Auth = () => {
                     placeholder="홍길동"
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="signup-birthdate">생년월일</Label>
+                  <Input
+                    id="signup-birthdate"
+                    type="date"
+                    value={birthDate}
+                    onChange={(e) => setBirthDate(e.target.value)}
                     required
                   />
                 </div>
