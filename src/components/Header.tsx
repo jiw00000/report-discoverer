@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { FileText, Menu, BookMarked, LogOut } from "lucide-react";
+import { FileText, Menu, BookMarked, LogOut, User } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 
@@ -38,6 +38,14 @@ const Header = () => {
               >
                 <BookMarked className="w-4 h-4 mr-2" />
                 내 과제함
+              </Button>
+              <Button
+                variant="ghost"
+                className="hidden md:inline-flex"
+                onClick={() => navigate("/profile")}
+              >
+                <User className="w-4 h-4 mr-2" />
+                내 정보
               </Button>
               <Button 
                 variant="outline"
