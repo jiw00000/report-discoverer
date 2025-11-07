@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ArrowLeft, Bookmark, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -6,6 +7,17 @@ import { Badge } from "@/components/ui/badge";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+
+const subCategories: Record<string, string[]> = {
+  "공과대학": ["컴퓨터공학", "인공지능", "소프트웨어", "전자전기", "반도체", "로봇공학", "기계", "항공", "재료", "산업공학", "토목", "건축", "환경", "에너지"],
+  "자연과학대학": ["수학", "통계", "물리", "화학", "생명과학", "지구과학", "천문학", "데이터과학", "계산과학"],
+  "인문대학": ["철학", "역사", "문학", "언어학", "종교학", "문화연구", "고전학", "미학", "사상사"],
+  "사회과학대학": ["사회학", "심리학", "인류학", "정치외교", "행정", "법학", "미디어", "커뮤니케이션", "저널리즘"],
+  "경영경제대학": ["경영학", "마케팅", "회계", "재무", "경제학", "국제무역", "금융", "창업", "혁신", "조직관리"],
+  "예술체육대학": ["디자인", "순수미술", "건축디자인", "음악", "연극", "영상", "영화", "체육", "무용", "패션"],
+  "의생명대학": ["의학", "간호", "약학", "생명공학", "유전학", "뇌과학", "바이오헬스", "헬스케어", "재활"],
+  "교육대학": ["교육학", "교육공학", "교사교육", "평가", "상담", "평생교육", "학습심리"]
+};
 
 const categoryData = {
   "공과대학": {
@@ -17,21 +29,24 @@ const categoryData = {
         description: "AI 기술의 발전과 산업 적용 사례 분석",
         url: "https://www.riss.kr/search/detail/DetailView.do?p_mat_type=example1",
         type: "논문",
-        source: "RISS"
+        source: "RISS",
+        subCategory: "인공지능"
       },
       {
         title: "반도체 산업 글로벌 트렌드",
         description: "차세대 반도체 기술과 시장 전망",
         url: "https://www.kiet.re.kr/research/view?no=example2",
         type: "보고서",
-        source: "산업연구원"
+        source: "산업연구원",
+        subCategory: "반도체"
       },
       {
         title: "건축 및 도시계획 지속가능성 연구",
         description: "친환경 건축과 스마트시티 사례",
         url: "https://www.stepi.re.kr/site/stepiko/report/View.do?reIdx=example3",
         type: "연구자료",
-        source: "STEPI"
+        source: "STEPI",
+        subCategory: "건축"
       }
     ]
   },
@@ -230,8 +245,13 @@ const CategoryResources = () => {
   const { category } = useParams<{ category: string }>();
   const navigate = useNavigate();
   const { user } = useAuth();
+  const [selectedSubCategory, setSelectedSubCategory] = useState<string | null>(null);
 
   const categoryInfo = category ? categoryData[category as keyof typeof categoryData] : null;
+  
+  const filteredResources = selectedSubCategory
+    ? categoryInfo?.resources.filter((r: any) => r.subCategory === selectedSubCategory)
+    : categoryInfo?.resources;
 
   const handleBookmark = async (resource: any) => {
     if (!user) {
@@ -285,22 +305,47 @@ const CategoryResources = () => {
           <h1 className="text-4xl font-bold text-foreground mb-3">
             {categoryInfo.title}
           </h1>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-lg text-muted-foreground mb-4">
             {categoryInfo.description}
           </p>
+          
+          {/* 세부 카테고리 필터 */}
+          <div className="flex flex-wrap gap-2 mt-4">
+            <Badge
+              variant={selectedSubCategory === null ? "default" : "outline"}
+              className="cursor-pointer"
+              onClick={() => setSelectedSubCategory(null)}
+            >
+              전체
+            </Badge>
+            {subCategories[categoryInfo.title]?.map((subCat) => (
+              <Badge
+                key={subCat}
+                variant={selectedSubCategory === subCat ? "default" : "outline"}
+                className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors"
+                onClick={() => setSelectedSubCategory(subCat)}
+              >
+                {subCat}
+              </Badge>
+            ))}
+          </div>
         </div>
 
         <div className="grid gap-6">
-          {categoryInfo.resources.map((resource, index) => (
+          {filteredResources && filteredResources.length > 0 ? (
+            filteredResources.map((resource: any, index: number) => (
             <Card key={index} className="hover:shadow-lg transition-shadow">
               <CardHeader>
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
                       <Badge variant="secondary">{resource.type}</Badge>
-                      <span className="text-sm text-muted-foreground">
-                        {resource.source}
-                      </span>
+                      <Badge variant="outline">{resource.source}</Badge>
+                      {resource.subCategory && (
+                        <Badge className="bg-primary/10 text-primary hover:bg-primary/20">
+                          {resource.subCategory}
+                        </Badge>
+                      )}
                     </div>
                     <CardTitle className="text-2xl mb-2">
                       {resource.title}
@@ -332,7 +377,14 @@ const CategoryResources = () => {
                 </Button>
               </CardContent>
             </Card>
-          ))}
+            ))
+          ) : (
+            <Card className="p-8 text-center">
+              <p className="text-muted-foreground">
+                선택한 세부 카테고리에 해당하는 자료가 없습니다.
+              </p>
+            </Card>
+          )}
         </div>
       </div>
     </div>

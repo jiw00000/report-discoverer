@@ -1,6 +1,18 @@
 import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Cpu, Atom, BookOpen, Users, TrendingUp, Palette, Heart, GraduationCap } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+
+const subCategories: Record<string, string[]> = {
+  "공과대학": ["컴퓨터공학", "인공지능", "소프트웨어", "전자전기", "반도체", "로봇공학", "기계", "항공", "재료", "산업공학", "토목", "건축", "환경", "에너지"],
+  "자연과학대학": ["수학", "통계", "물리", "화학", "생명과학", "지구과학", "천문학", "데이터과학", "계산과학"],
+  "인문대학": ["철학", "역사", "문학", "언어학", "종교학", "문화연구", "고전학", "미학", "사상사"],
+  "사회과학대학": ["사회학", "심리학", "인류학", "정치외교", "행정", "법학", "미디어", "커뮤니케이션", "저널리즘"],
+  "경영경제대학": ["경영학", "마케팅", "회계", "재무", "경제학", "국제무역", "금융", "창업", "혁신", "조직관리"],
+  "예술체육대학": ["디자인", "순수미술", "건축디자인", "음악", "연극", "영상", "영화", "체육", "무용", "패션"],
+  "의생명대학": ["의학", "간호", "약학", "생명공학", "유전학", "뇌과학", "바이오헬스", "헬스케어", "재활"],
+  "교육대학": ["교육학", "교육공학", "교사교육", "평가", "상담", "평생교육", "학습심리"]
+};
 
 const categories = [
   {
@@ -93,14 +105,26 @@ const CategoryGrid = () => {
                   {category.title}
                 </h3>
                 
-                <p className="text-sm text-muted-foreground mb-4 min-h-[40px]">
-                  {category.description}
-                </p>
+                <div className="flex flex-wrap gap-1.5 mb-4 min-h-[80px]">
+                  {subCategories[category.title]?.slice(0, 8).map((subCat, idx) => (
+                    <Badge
+                      key={idx}
+                      variant="outline"
+                      className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors text-xs"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        navigate(`/search?q=${encodeURIComponent(subCat)}`);
+                      }}
+                    >
+                      {subCat}
+                    </Badge>
+                  ))}
+                </div>
                 
                 <div className="flex items-center justify-between text-sm">
                   <span className="text-primary font-semibold">{category.count} 자료</span>
                   <span className="text-muted-foreground group-hover:text-primary transition-colors">
-                    탐색하기 →
+                    전체 보기 →
                   </span>
                 </div>
               </Card>
