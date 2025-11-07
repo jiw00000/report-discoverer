@@ -1,9 +1,20 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import heroImage from "@/assets/hero-background.jpg";
 
 const Hero = () => {
+  const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = () => {
+    if (searchQuery.trim()) {
+      navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+    }
+  };
+
   return (
     <section className="relative min-h-[600px] flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
@@ -38,11 +49,18 @@ const Hero = () => {
               <Search className="w-5 h-5 text-muted-foreground mr-2" />
               <Input 
                 type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                 placeholder="주제나 키워드로 검색해보세요 (예: MZ세대 소비 트렌드)"
                 className="border-0 focus-visible:ring-0 bg-transparent text-base"
               />
             </div>
-            <Button size="lg" className="rounded-full px-8 bg-gradient-to-r from-primary to-accent hover:shadow-lg transition-all">
+            <Button 
+              size="lg" 
+              onClick={handleSearch}
+              className="rounded-full px-8 bg-gradient-to-r from-primary to-accent hover:shadow-lg transition-all"
+            >
               검색
             </Button>
           </div>
