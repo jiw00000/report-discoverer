@@ -8,111 +8,219 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
 const categoryData = {
-  "경영/경제": {
-    title: "경영/경제",
-    description: "마케팅 사례, ESG 경영, 소비자 행동, 무역 동향",
+  "공과대학": {
+    title: "공과대학",
+    description: "컴퓨터공학, 인공지능, 전자전기, 반도체, 기계, 항공, 토목, 건축",
     resources: [
       {
-        title: "2024 글로벌 ESG 경영 동향",
-        description: "세계 주요 기업들의 ESG 경영 사례와 전략 분석",
-        url: "https://example.com/esg-2024",
+        title: "인공지능과 머신러닝 최신 동향",
+        description: "AI 기술의 발전과 산업 적용 사례 분석",
+        url: "https://www.riss.kr/search/detail/DetailView.do?p_mat_type=example1",
+        type: "논문",
+        source: "RISS"
+      },
+      {
+        title: "반도체 산업 글로벌 트렌드",
+        description: "차세대 반도체 기술과 시장 전망",
+        url: "https://www.kiet.re.kr/research/view?no=example2",
         type: "보고서",
-        source: "한국경제연구원"
+        source: "산업연구원"
       },
       {
-        title: "디지털 마케팅 성공 사례 모음",
-        description: "국내외 성공적인 디지털 마케팅 캠페인 사례 연구",
-        url: "https://example.com/digital-marketing",
-        type: "사례연구",
-        source: "마케팅협회"
-      },
-      {
-        title: "Z세대 소비 트렌드 분석",
-        description: "Z세대의 소비 패턴과 선호도에 대한 심층 분석",
-        url: "https://example.com/gen-z-trends",
+        title: "건축 및 도시계획 지속가능성 연구",
+        description: "친환경 건축과 스마트시티 사례",
+        url: "https://www.stepi.re.kr/site/stepiko/report/View.do?reIdx=example3",
         type: "연구자료",
-        source: "소비자연구원"
+        source: "STEPI"
       }
     ]
   },
-  "IT/테크": {
-    title: "IT/테크",
-    description: "AI 윤리, 메타버스, 데이터 사이언스, 최신 기술 트렌드",
+  "자연과학대학": {
+    title: "자연과학대학",
+    description: "수학, 통계, 물리, 화학, 생명과학, 지구과학, 데이터과학",
     resources: [
       {
-        title: "AI 윤리 가이드라인",
-        description: "인공지능 개발 및 활용에 있어 윤리적 고려사항",
-        url: "https://example.com/ai-ethics",
-        type: "가이드",
-        source: "AI 연구소"
+        title: "데이터 사이언스 입문과 응용",
+        description: "통계와 머신러닝을 활용한 데이터 분석 기법",
+        url: "https://www.riss.kr/search/detail/DetailView.do?p_mat_type=example4",
+        type: "논문",
+        source: "RISS"
       },
       {
-        title: "메타버스 플랫폼 비교 분석",
-        description: "주요 메타버스 플랫폼의 특징과 활용 방안",
-        url: "https://example.com/metaverse",
-        type: "분석보고서",
-        source: "테크리뷰"
+        title: "기후변화와 지구과학",
+        description: "지구 온난화의 과학적 메커니즘 연구",
+        url: "https://www.kdi.re.kr/research/reportView?pub_no=example5",
+        type: "보고서",
+        source: "KDI"
       },
       {
-        title: "데이터 사이언스 입문",
-        description: "데이터 분석의 기초부터 머신러닝까지",
-        url: "https://example.com/data-science",
-        type: "교육자료",
-        source: "데이터과학회"
+        title: "생명과학의 최신 연구 동향",
+        description: "유전자 편집과 생명공학 기술 발전",
+        url: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11example6",
+        type: "학술자료",
+        source: "DBpia"
       }
     ]
   },
-  "사회/문화": {
-    title: "사회/문화",
-    description: "인구 변화, 환경 문제, 미디어 리터러시, 젠더 이슈",
-    resources: [
-      {
-        title: "인구 구조 변화와 사회적 영향",
-        description: "저출산·고령화가 가져올 사회 변화 전망",
-        url: "https://example.com/population",
-        type: "정책보고서",
-        source: "통계청"
-      },
-      {
-        title: "기후변화와 환경정책",
-        description: "글로벌 기후위기 대응 정책 사례",
-        url: "https://example.com/climate",
-        type: "정책자료",
-        source: "환경부"
-      },
-      {
-        title: "미디어 리터러시 교육 가이드",
-        description: "가짜뉴스 판별과 비판적 미디어 활용법",
-        url: "https://example.com/media-literacy",
-        type: "교육자료",
-        source: "언론진흥재단"
-      }
-    ]
-  },
-  "인문/예술": {
-    title: "인문/예술",
-    description: "현대 철학, 디자인 트렌드, 문화 콘텐츠 분석",
+  "인문대학": {
+    title: "인문대학",
+    description: "철학, 역사, 문학, 언어학, 종교학, 문화연구, 미학",
     resources: [
       {
         title: "현대 철학의 주요 담론",
         description: "21세기 철학의 핵심 주제와 사상가들",
-        url: "https://example.com/philosophy",
+        url: "https://www.riss.kr/search/detail/DetailView.do?p_mat_type=example7",
+        type: "논문",
+        source: "RISS"
+      },
+      {
+        title: "한국 근현대사 연구",
+        description: "한국사의 주요 사건과 역사적 의미",
+        url: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11example8",
         type: "학술자료",
-        source: "철학연구소"
+        source: "DBpia"
       },
       {
-        title: "2024 디자인 트렌드",
-        description: "올해의 주요 디자인 트렌드와 적용 사례",
-        url: "https://example.com/design-trends",
-        type: "트렌드리포트",
-        source: "디자인협회"
+        title: "세계 문학의 이해",
+        description: "주요 작품과 문학사조 분석",
+        url: "https://kiss.kstudy.com/Detail/Ar?key=example9",
+        type: "연구자료",
+        source: "KISS"
+      }
+    ]
+  },
+  "사회과학대학": {
+    title: "사회과학대학",
+    description: "사회학, 심리학, 정치외교, 행정, 법학, 미디어, 커뮤니케이션",
+    resources: [
+      {
+        title: "현대 사회의 불평등 연구",
+        description: "소득 불평등과 사회 계층화 분석",
+        url: "https://www.kdi.re.kr/research/reportView?pub_no=example10",
+        type: "보고서",
+        source: "KDI"
       },
       {
-        title: "한류 콘텐츠 글로벌 영향력 분석",
-        description: "K-문화의 세계적 확산과 산업적 가치",
-        url: "https://example.com/k-culture",
-        type: "분석보고서",
-        source: "콘텐츠진흥원"
+        title: "디지털 미디어와 커뮤니케이션",
+        description: "소셜미디어 시대의 정보 소통 방식",
+        url: "https://www.riss.kr/search/detail/DetailView.do?p_mat_type=example11",
+        type: "논문",
+        source: "RISS"
+      },
+      {
+        title: "심리학의 이해와 응용",
+        description: "인지심리학과 사회심리학 연구",
+        url: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11example12",
+        type: "학술자료",
+        source: "DBpia"
+      }
+    ]
+  },
+  "경영경제대학": {
+    title: "경영경제대학",
+    description: "경영학, 마케팅, 회계, 재무, 경제학, 국제무역, 창업",
+    resources: [
+      {
+        title: "디지털 마케팅 전략과 사례",
+        description: "온라인 마케팅의 최신 트렌드와 성공 사례",
+        url: "https://www.kdi.re.kr/research/reportView?pub_no=example13",
+        type: "보고서",
+        source: "KDI"
+      },
+      {
+        title: "스타트업 창업 가이드",
+        description: "성공적인 창업을 위한 전략과 실무",
+        url: "https://www.riss.kr/search/detail/DetailView.do?p_mat_type=example14",
+        type: "논문",
+        source: "RISS"
+      },
+      {
+        title: "ESG 경영과 지속가능성",
+        description: "기업의 사회적 책임과 ESG 경영 사례",
+        url: "https://kiss.kstudy.com/Detail/Ar?key=example15",
+        type: "연구자료",
+        source: "KISS"
+      }
+    ]
+  },
+  "예술체육대학": {
+    title: "예술체육대학",
+    description: "디자인, 순수미술, 음악, 연극, 영상, 체육, 무용",
+    resources: [
+      {
+        title: "현대 디자인 트렌드",
+        description: "UX/UI 디자인과 비주얼 커뮤니케이션",
+        url: "https://www.riss.kr/search/detail/DetailView.do?p_mat_type=example16",
+        type: "논문",
+        source: "RISS"
+      },
+      {
+        title: "영화와 영상 콘텐츠 분석",
+        description: "영상 매체의 서사 구조와 표현 기법",
+        url: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11example17",
+        type: "학술자료",
+        source: "DBpia"
+      },
+      {
+        title: "스포츠과학과 운동생리학",
+        description: "운동과 건강에 대한 과학적 접근",
+        url: "https://kiss.kstudy.com/Detail/Ar?key=example18",
+        type: "연구자료",
+        source: "KISS"
+      }
+    ]
+  },
+  "의생명대학": {
+    title: "의생명대학",
+    description: "의학, 간호, 약학, 생명공학, 유전학, 뇌과학, 바이오헬스",
+    resources: [
+      {
+        title: "의료 AI와 디지털 헬스케어",
+        description: "인공지능을 활용한 의료 진단과 치료",
+        url: "https://www.kdi.re.kr/research/reportView?pub_no=example19",
+        type: "보고서",
+        source: "KDI"
+      },
+      {
+        title: "유전자 치료와 정밀의학",
+        description: "개인 맞춤형 의료의 현재와 미래",
+        url: "https://www.riss.kr/search/detail/DetailView.do?p_mat_type=example20",
+        type: "논문",
+        source: "RISS"
+      },
+      {
+        title: "뇌과학과 신경과학 연구",
+        description: "뇌 기능과 신경계 질환 연구 동향",
+        url: "https://www.stepi.re.kr/site/stepiko/report/View.do?reIdx=example21",
+        type: "연구자료",
+        source: "STEPI"
+      }
+    ]
+  },
+  "교육대학": {
+    title: "교육대학",
+    description: "교육학, 교육공학, 교사교육, 평가, 상담, 평생교육",
+    resources: [
+      {
+        title: "에듀테크와 디지털 교육",
+        description: "교육 기술의 발전과 온라인 학습",
+        url: "https://www.riss.kr/search/detail/DetailView.do?p_mat_type=example22",
+        type: "논문",
+        source: "RISS"
+      },
+      {
+        title: "평생교육과 성인학습",
+        description: "평생학습 사회의 교육 체계",
+        url: "https://www.kdi.re.kr/research/reportView?pub_no=example23",
+        type: "보고서",
+        source: "KDI"
+      },
+      {
+        title: "학습심리와 교육평가",
+        description: "효과적인 학습 방법과 평가 시스템",
+        url: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11example24",
+        type: "학술자료",
+        source: "DBpia"
       }
     ]
   }

@@ -15,7 +15,7 @@ import { toast } from "sonner";
 const searchData: Record<string, any> = {
   "mz세대": {
     relatedKeywords: ["Z세대", "밀레니얼", "소비트렌드", "디지털네이티브", "MZ세대 마케팅"],
-    relatedCategories: ["경영/경제", "사회/문화"],
+    relatedCategories: ["경영경제대학", "사회과학대학"],
     resources: [
       {
         title: "MZ세대의 소비 패턴과 마케팅 전략",
@@ -23,7 +23,7 @@ const searchData: Record<string, any> = {
         url: "https://www.riss.kr/search/detail/DetailView.do?p_mat_type=be54d9b8bc7cdb09&control_no=example1",
         type: "논문",
         source: "RISS",
-        category: "경영/경제"
+        category: "경영경제대학"
       },
       {
         title: "Z세대 디지털 소비 행태 조사 보고서",
@@ -31,7 +31,7 @@ const searchData: Record<string, any> = {
         url: "https://kosis.kr/statHtml/statHtml.do?orgId=101&tblId=DT_1example",
         type: "통계/데이터",
         source: "KOSIS",
-        category: "사회/문화"
+        category: "사회과학대학"
       },
       {
         title: "밀레니얼 세대의 사회문화적 특성 연구",
@@ -39,13 +39,13 @@ const searchData: Record<string, any> = {
         url: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11example",
         type: "논문",
         source: "DBpia",
-        category: "사회/문화"
+        category: "사회과학대학"
       }
     ]
   },
   "ai": {
     relatedKeywords: ["인공지능", "머신러닝", "딥러닝", "ChatGPT", "AI 윤리"],
-    relatedCategories: ["IT/테크"],
+    relatedCategories: ["공과대학", "자연과학대학"],
     resources: [
       {
         title: "생성형 AI의 현황과 미래 전망",
@@ -53,7 +53,7 @@ const searchData: Record<string, any> = {
         url: "https://www.kdi.re.kr/research/reportView?pub_no=example1",
         type: "보고서",
         source: "KDI",
-        category: "IT/테크"
+        category: "공과대학"
       },
       {
         title: "인공지능 윤리 가이드라인 연구",
@@ -61,7 +61,7 @@ const searchData: Record<string, any> = {
         url: "https://www.stepi.re.kr/site/stepiko/report/View.do?reIdx=example2",
         type: "보고서",
         source: "STEPI",
-        category: "IT/테크"
+        category: "공과대학"
       },
       {
         title: "AI 기술 동향 및 산업 적용 사례",
@@ -69,13 +69,13 @@ const searchData: Record<string, any> = {
         url: "https://www.kiet.re.kr/research/view?no=example3",
         type: "보고서",
         source: "산업연구원",
-        category: "IT/테크"
+        category: "공과대학"
       }
     ]
   },
   "esg": {
     relatedKeywords: ["ESG경영", "지속가능경영", "환경경영", "사회적책임", "ESG투자"],
-    relatedCategories: ["경영/경제"],
+    relatedCategories: ["경영경제대학", "사회과학대학"],
     resources: [
       {
         title: "국내 기업의 ESG 경영 실태와 개선 방안",
@@ -83,7 +83,7 @@ const searchData: Record<string, any> = {
         url: "https://www.kdi.re.kr/research/reportView?pub_no=example4",
         type: "보고서",
         source: "KDI",
-        category: "경영/경제"
+        category: "경영경제대학"
       },
       {
         title: "ESG 투자 동향 및 전망",
@@ -91,13 +91,13 @@ const searchData: Record<string, any> = {
         url: "https://kiss.kstudy.com/Detail/Ar?key=example5",
         type: "논문",
         source: "KISS",
-        category: "경영/경제"
+        category: "경영경제대학"
       }
     ]
   },
   "메타버스": {
     relatedKeywords: ["가상현실", "VR", "AR", "메타버스 플랫폼", "디지털 전환"],
-    relatedCategories: ["IT/테크", "사회/문화"],
+    relatedCategories: ["공과대학", "예술체육대학"],
     resources: [
       {
         title: "메타버스 산업 동향 및 발전 방향",
@@ -105,7 +105,7 @@ const searchData: Record<string, any> = {
         url: "https://www.stepi.re.kr/site/stepiko/report/View.do?reIdx=example6",
         type: "보고서",
         source: "STEPI",
-        category: "IT/테크"
+        category: "공과대학"
       },
       {
         title: "메타버스 플랫폼의 사회문화적 영향",
@@ -113,7 +113,95 @@ const searchData: Record<string, any> = {
         url: "https://www.riss.kr/search/detail/DetailView.do?p_mat_type=be54d9b8bc7cdb09&control_no=example7",
         type: "논문",
         source: "RISS",
-        category: "사회/문화"
+        category: "예술체육대학"
+      }
+    ]
+  },
+  "반도체": {
+    relatedKeywords: ["칩", "전자공학", "나노기술", "반도체 산업", "웨이퍼"],
+    relatedCategories: ["공과대학"],
+    resources: [
+      {
+        title: "차세대 반도체 기술 동향",
+        description: "3nm 이하 공정 기술과 차세대 반도체 소재 연구",
+        url: "https://www.kiet.re.kr/research/view?no=example8",
+        type: "보고서",
+        source: "산업연구원",
+        category: "공과대학"
+      },
+      {
+        title: "글로벌 반도체 공급망 분석",
+        description: "반도체 산업의 국제 경쟁 구도와 공급망 전략",
+        url: "https://www.riss.kr/search/detail/DetailView.do?p_mat_type=example9",
+        type: "논문",
+        source: "RISS",
+        category: "공과대학"
+      }
+    ]
+  },
+  "바이오": {
+    relatedKeywords: ["생명공학", "유전자", "의료", "바이오테크", "제약"],
+    relatedCategories: ["의생명대학", "자연과학대학"],
+    resources: [
+      {
+        title: "바이오헬스 산업 현황과 전망",
+        description: "국내 바이오산업의 성장과 글로벌 경쟁력 분석",
+        url: "https://www.kdi.re.kr/research/reportView?pub_no=example10",
+        type: "보고서",
+        source: "KDI",
+        category: "의생명대학"
+      },
+      {
+        title: "유전자 편집 기술의 발전",
+        description: "CRISPR 기술과 정밀의학의 미래",
+        url: "https://www.stepi.re.kr/site/stepiko/report/View.do?reIdx=example11",
+        type: "연구자료",
+        source: "STEPI",
+        category: "의생명대학"
+      }
+    ]
+  },
+  "디자인": {
+    relatedKeywords: ["UX", "UI", "그래픽", "제품디자인", "브랜딩"],
+    relatedCategories: ["예술체육대학"],
+    resources: [
+      {
+        title: "사용자 경험 디자인 방법론",
+        description: "UX/UI 디자인의 원칙과 실무 적용 사례",
+        url: "https://www.riss.kr/search/detail/DetailView.do?p_mat_type=example12",
+        type: "논문",
+        source: "RISS",
+        category: "예술체육대학"
+      },
+      {
+        title: "브랜드 아이덴티티 디자인",
+        description: "성공적인 브랜드 디자인 전략과 사례 연구",
+        url: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11example13",
+        type: "학술자료",
+        source: "DBpia",
+        category: "예술체육대학"
+      }
+    ]
+  },
+  "교육": {
+    relatedKeywords: ["에듀테크", "온라인교육", "평생학습", "교수법", "교육정책"],
+    relatedCategories: ["교육대학"],
+    resources: [
+      {
+        title: "디지털 전환 시대의 교육",
+        description: "에듀테크 활용과 미래 교육 방향",
+        url: "https://www.kdi.re.kr/research/reportView?pub_no=example14",
+        type: "보고서",
+        source: "KDI",
+        category: "교육대학"
+      },
+      {
+        title: "평생학습 사회의 교육 시스템",
+        description: "성인 학습자를 위한 교육 프로그램 개발",
+        url: "https://www.riss.kr/search/detail/DetailView.do?p_mat_type=example15",
+        type: "논문",
+        source: "RISS",
+        category: "교육대학"
       }
     ]
   }
@@ -149,7 +237,7 @@ const SearchResults = () => {
   const normalizedQuery = displayQuery.toLowerCase().replace(/\s+/g, "");
   const searchResult = searchData[normalizedQuery] || {
     relatedKeywords: ["학술자료", "논문", "통계", "보고서"],
-    relatedCategories: ["경영/경제", "IT/테크", "사회/문화"],
+    relatedCategories: ["공과대학", "자연과학대학", "인문대학", "사회과학대학"],
     resources: defaultResources
   };
 

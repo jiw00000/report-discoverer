@@ -1,35 +1,63 @@
 import { Card } from "@/components/ui/card";
-import { BookOpen, Cpu, Users, Palette } from "lucide-react";
+import { Cpu, Atom, BookOpen, Users, TrendingUp, Palette, Heart, GraduationCap } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const categories = [
   {
-    icon: BookOpen,
-    title: "경영/경제",
-    description: "마케팅 사례, ESG 경영, 소비자 행동, 무역 동향",
-    color: "from-blue-500 to-cyan-500",
-    count: "2,500+"
-  },
-  {
     icon: Cpu,
-    title: "IT/테크",
-    description: "AI 윤리, 메타버스, 데이터 사이언스, 최신 기술 트렌드",
-    color: "from-cyan-500 to-teal-500",
-    count: "3,200+"
+    title: "공과대학",
+    description: "컴퓨터공학, 인공지능, 전자전기, 반도체, 기계, 항공, 토목, 건축",
+    color: "from-blue-500 to-cyan-500",
+    count: "4,200+"
   },
   {
-    icon: Users,
-    title: "사회/문화",
-    description: "인구 변화, 환경 문제, 미디어 리터러시, 젠더 이슈",
-    color: "from-teal-500 to-emerald-500",
+    icon: Atom,
+    title: "자연과학대학",
+    description: "수학, 통계, 물리, 화학, 생명과학, 지구과학, 데이터과학",
+    color: "from-cyan-500 to-teal-500",
+    count: "3,500+"
+  },
+  {
+    icon: BookOpen,
+    title: "인문대학",
+    description: "철학, 역사, 문학, 언어학, 종교학, 문화연구, 미학",
+    color: "from-purple-500 to-pink-500",
     count: "2,800+"
   },
   {
+    icon: Users,
+    title: "사회과학대학",
+    description: "사회학, 심리학, 정치외교, 행정, 법학, 미디어, 커뮤니케이션",
+    color: "from-orange-500 to-red-500",
+    count: "3,200+"
+  },
+  {
+    icon: TrendingUp,
+    title: "경영경제대학",
+    description: "경영학, 마케팅, 회계, 재무, 경제학, 국제무역, 창업",
+    color: "from-green-500 to-emerald-500",
+    count: "3,600+"
+  },
+  {
     icon: Palette,
-    title: "인문/예술",
-    description: "현대 철학, 디자인 트렌드, 문화 콘텐츠 분석",
-    color: "from-emerald-500 to-green-500",
-    count: "1,500+"
+    title: "예술체육대학",
+    description: "디자인, 순수미술, 음악, 연극, 영상, 체육, 무용",
+    color: "from-pink-500 to-rose-500",
+    count: "2,100+"
+  },
+  {
+    icon: Heart,
+    title: "의생명대학",
+    description: "의학, 간호, 약학, 생명공학, 유전학, 뇌과학, 바이오헬스",
+    color: "from-red-500 to-orange-500",
+    count: "2,900+"
+  },
+  {
+    icon: GraduationCap,
+    title: "교육대학",
+    description: "교육학, 교육공학, 교사교육, 평가, 상담, 평생교육",
+    color: "from-indigo-500 to-purple-500",
+    count: "1,800+"
   }
 ];
 
@@ -48,7 +76,7 @@ const CategoryGrid = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
           {categories.map((category, index) => {
             const Icon = category.icon;
             return (
