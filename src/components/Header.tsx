@@ -4,6 +4,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { FileText, Menu, BookMarked, LogOut, User } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
+import UnifiedSearchBar from "./UnifiedSearchBar";
 
 const Header = () => {
   const { user, signOut } = useAuth();
@@ -30,16 +31,17 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between px-4">
-        <div 
-          className="flex items-center gap-2 cursor-pointer" 
-          onClick={() => navigate("/")}
-        >
-          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-            <FileText className="w-6 h-6 text-white" />
+      <div className="container px-4 py-3">
+        <div className="flex h-16 items-center justify-between mb-4">
+          <div 
+            className="flex items-center gap-2 cursor-pointer" 
+            onClick={() => navigate("/")}
+          >
+            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+              <FileText className="w-6 h-6 text-white" />
+            </div>
+            <span className="text-2xl font-bold text-foreground">리포트랙</span>
           </div>
-          <span className="text-2xl font-bold text-foreground">리포트랙</span>
-        </div>
 
         <nav className="hidden md:flex items-center gap-6">
           <a href="#categories" className="text-foreground hover:text-primary transition-colors">
@@ -188,6 +190,11 @@ const Header = () => {
               </nav>
             </SheetContent>
           </Sheet>
+        </div>
+        </div>
+        
+        <div className="w-full">
+          <UnifiedSearchBar />
         </div>
       </div>
     </header>
