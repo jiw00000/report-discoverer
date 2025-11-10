@@ -5,8 +5,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useAuth } from "@/contexts/AuthContext";
 import { Loader2, ArrowLeft } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
@@ -16,8 +19,12 @@ const Auth = () => {
   const [birthMonth, setBirthMonth] = useState("");
   const [birthDay, setBirthDay] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [resetEmail, setResetEmail] = useState("");
+  const [isResetDialogOpen, setIsResetDialogOpen] = useState(false);
+  const [isResetting, setIsResetting] = useState(false);
   const { signIn, signUp, user } = useAuth();
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   useEffect(() => {
     if (user) {
@@ -38,6 +45,36 @@ const Auth = () => {
     const birthDate = `${birthYear}-${birthMonth.padStart(2, '0')}-${birthDay.padStart(2, '0')}`;
     await signUp(email, password, fullName, birthDate);
     setIsLoading(false);
+  };
+
+  const handleResetPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsResetting(true);
+
+    try {
+      const { data, error } = await supabase.functions.invoke('reset-password', {
+        body: { email: resetEmail }
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "임시 비밀번호 발송",
+        description: "등록된 이메일로 임시 비밀번호가 발송되었습니다.",
+      });
+
+      setIsResetDialogOpen(false);
+      setResetEmail("");
+    } catch (error: any) {
+      console.error("Password reset error:", error);
+      toast({
+        title: "오류 발생",
+        description: error.message || "비밀번호 재설정 중 오류가 발생했습니다.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsResetting(false);
+    }
   };
 
   return (
@@ -100,6 +137,45 @@ const Auth = () => {
                     "로그인"
                   )}
                 </Button>
+                
+                <Dialog open={isResetDialogOpen} onOpenChange={setIsResetDialogOpen}>
+                  <DialogTrigger asChild>
+                    <Button variant="link" className="w-full text-sm text-muted-foreground">
+                      비밀번호를 잊으셨나요?
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>비밀번호 찾기</DialogTitle>
+                      <DialogDescription>
+                        회원가입 시 등록한 이메일 주소를 입력하시면 임시 비밀번호를 발송해 드립니다.
+                      </DialogDescription>
+                    </DialogHeader>
+                    <form onSubmit={handleResetPassword} className="space-y-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="reset-email">이메일</Label>
+                        <Input
+                          id="reset-email"
+                          type="email"
+                          placeholder="your@email.com"
+                          value={resetEmail}
+                          onChange={(e) => setResetEmail(e.target.value)}
+                          required
+                        />
+                      </div>
+                      <Button type="submit" className="w-full" disabled={isResetting}>
+                        {isResetting ? (
+                          <>
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            발송 중...
+                          </>
+                        ) : (
+                          "임시 비밀번호 요청"
+                        )}
+                      </Button>
+                    </form>
+                  </DialogContent>
+                </Dialog>
               </form>
             </TabsContent>
 
