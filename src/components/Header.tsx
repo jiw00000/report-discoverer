@@ -3,13 +3,15 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { FileText, Menu, BookMarked, LogOut, User } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import UnifiedSearchBar from "./UnifiedSearchBar";
 
 const Header = () => {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const isHomePage = location.pathname === "/";
 
   const handleNavigation = (path: string) => {
     navigate(path);
@@ -43,17 +45,19 @@ const Header = () => {
             <span className="text-2xl font-bold text-foreground">리포트랙</span>
           </div>
 
-        <nav className="hidden md:flex items-center gap-6">
-          <a href="#categories" className="text-foreground hover:text-primary transition-colors">
-            카테고리
-          </a>
-          <a href="#resources" className="text-foreground hover:text-primary transition-colors">
-            자료 유형
-          </a>
-          <a href="#features" className="text-foreground hover:text-primary transition-colors">
-            서비스 소개
-          </a>
-        </nav>
+        {!isHomePage && (
+          <nav className="hidden md:flex items-center gap-6">
+            <a href="#categories" className="text-foreground hover:text-primary transition-colors">
+              카테고리
+            </a>
+            <a href="#resources" className="text-foreground hover:text-primary transition-colors">
+              자료 유형
+            </a>
+            <a href="#features" className="text-foreground hover:text-primary transition-colors">
+              서비스 소개
+            </a>
+          </nav>
+        )}
 
         <div className="flex items-center gap-3">
           {user ? (
@@ -193,9 +197,11 @@ const Header = () => {
         </div>
         </div>
         
-        <div className="w-full">
-          <UnifiedSearchBar />
-        </div>
+        {!isHomePage && (
+          <div className="w-full">
+            <UnifiedSearchBar />
+          </div>
+        )}
       </div>
     </header>
   );
