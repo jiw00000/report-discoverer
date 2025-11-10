@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { FileText, Menu, BookMarked, LogOut, User } from "lucide-react";
+import { FileText, Menu, BookMarked, LogOut, User, Sparkles } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate, useLocation } from "react-router-dom";
 import UnifiedSearchBar from "./UnifiedSearchBar";
@@ -46,6 +46,14 @@ const Header = () => {
           </div>
 
         <div className="flex items-center gap-3">
+          <Button
+            variant="ghost"
+            className="hidden md:inline-flex"
+            onClick={() => navigate("/ai-search")}
+          >
+            <Sparkles className="w-4 h-4 mr-2" />
+            AI 검색
+          </Button>
           {user ? (
             <>
               <Button
@@ -105,6 +113,15 @@ const Header = () => {
                 </div>
 
                 <div className="border-t border-border my-4" />
+
+                <Button
+                  variant="ghost"
+                  className="justify-start"
+                  onClick={() => handleNavigation("/ai-search")}
+                >
+                  <Sparkles className="w-4 h-4 mr-2" />
+                  AI 검색
+                </Button>
 
                 {user ? (
                   <>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search } from "lucide-react";
+import { Search, Sparkles } from "lucide-react";
 import heroImage from "@/assets/hero-background.jpg";
 
 const Hero = () => {
@@ -43,7 +43,7 @@ const Hero = () => {
         </p>
 
         {/* Search Bar */}
-        <div className="max-w-2xl mx-auto mb-8">
+        <div className="max-w-2xl mx-auto mb-6">
           <div className="flex gap-2 bg-white/95 backdrop-blur-sm rounded-full p-2 shadow-2xl">
             <div className="flex-1 flex items-center pl-4">
               <Search className="w-5 h-5 text-muted-foreground mr-2" />
@@ -62,6 +62,18 @@ const Hero = () => {
               className="rounded-full px-8 bg-gradient-to-r from-primary to-accent hover:shadow-lg transition-all"
             >
               검색
+            </Button>
+          </div>
+          
+          {/* AI Search Button */}
+          <div className="mt-4 text-center">
+            <Button
+              variant="ghost"
+              onClick={() => navigate("/ai-search")}
+              className="text-white hover:text-accent-foreground hover:bg-white/20 transition-all"
+            >
+              <Sparkles className="w-4 h-4 mr-2" />
+              AI가 대신 찾아드려요
             </Button>
           </div>
         </div>

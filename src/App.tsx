@@ -10,6 +10,7 @@ import MyBookmarks from "./pages/MyBookmarks";
 import CategoryResources from "./pages/CategoryResources";
 import SearchResults from "./pages/SearchResults";
 import Profile from "./pages/Profile";
+import AISearch from "./pages/AISearch";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,6 +28,7 @@ const App = () => (
             <Route path="/my-bookmarks" element={<MyBookmarks />} />
             <Route path="/category/:category" element={<CategoryResources />} />
             <Route path="/search" element={<SearchResults />} />
+            <Route path="/ai-search" element={<AISearch />} />
             <Route path="/profile" element={<Profile />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
