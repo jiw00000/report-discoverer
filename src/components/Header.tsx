@@ -45,20 +45,6 @@ const Header = () => {
             <span className="text-2xl font-bold text-foreground">리포트랙</span>
           </div>
 
-        {!isHomePage && (
-          <nav className="hidden md:flex items-center gap-6">
-            <a href="#categories" className="text-foreground hover:text-primary transition-colors">
-              카테고리
-            </a>
-            <a href="#resources" className="text-foreground hover:text-primary transition-colors">
-              자료 유형
-            </a>
-            <a href="#features" className="text-foreground hover:text-primary transition-colors">
-              서비스 소개
-            </a>
-          </nav>
-        )}
-
         <div className="flex items-center gap-3">
           {user ? (
             <>
@@ -117,30 +103,6 @@ const Header = () => {
                   </div>
                   <span className="text-2xl font-bold text-foreground">리포트랙</span>
                 </div>
-
-                <Button
-                  variant="ghost"
-                  className="justify-start"
-                  onClick={() => handleScrollToSection("categories")}
-                >
-                  카테고리
-                </Button>
-                
-                <Button
-                  variant="ghost"
-                  className="justify-start"
-                  onClick={() => handleScrollToSection("resources")}
-                >
-                  자료 유형
-                </Button>
-                
-                <Button
-                  variant="ghost"
-                  className="justify-start"
-                  onClick={() => handleScrollToSection("features")}
-                >
-                  서비스 소개
-                </Button>
 
                 <div className="border-t border-border my-4" />
 
